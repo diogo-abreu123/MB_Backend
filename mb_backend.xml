@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mb_backend" default="all">
+  
+  
+  <property file="mb_backend.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.4/jackson-core-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.9.4/jackson-databind-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.4/jackson-datatype-jdk8-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.4/jackson-datatype-jsr310-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.4/jackson-module-parameter-names-2.9.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml:classmate:1.3.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.jayway.jsonpath:json-path:2.4.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.validation:validation-api:2.0.1.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy-agent:1.7.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy-agent/1.7.10/byte-buddy-agent-1.7.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy:1.7.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy/1.7.10/byte-buddy-1.7.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:accessors-smart:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:json-smart:2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/json-smart/2.3/json-smart-2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.28.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-core/8.5.28/tomcat-embed-core-8.5.28.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.28.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-el/8.5.28/tomcat-embed-el-8.5.28.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.28.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.28/tomcat-embed-websocket-8.5.28.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.assertj:assertj-core:3.9.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.validator:hibernate-validator:6.0.7.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/validator/hibernate-validator/6.0.7.Final/hibernate-validator-6.0.7.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.json:json:20180130.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/json/json/20180130/json-20180130.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mockito:mockito-core:2.15.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.objenesis:objenesis:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/objenesis/objenesis/2.6/objenesis-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:5.0.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.skyscreamer:jsonassert:1.5.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-autoconfigure/2.0.0.RELEASE/spring-boot-autoconfigure-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-json/2.0.0.RELEASE/spring-boot-starter-json-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-logging/2.0.0.RELEASE/spring-boot-starter-logging-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-test:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-test/2.0.0.RELEASE/spring-boot-starter-test-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-tomcat/2.0.0.RELEASE/spring-boot-starter-tomcat-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-web/2.0.0.RELEASE/spring-boot-starter-web-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter/2.0.0.RELEASE/spring-boot-starter-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test-autoconfigure/2.0.0.RELEASE/spring-boot-test-autoconfigure-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test/2.0.0.RELEASE/spring-boot-test-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot:2.0.0.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot/2.0.0.RELEASE/spring-boot-2.0.0.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-aop:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-aop/5.0.4.RELEASE/spring-aop-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-beans:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-beans/5.0.4.RELEASE/spring-beans-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-context:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-context/5.0.4.RELEASE/spring-context-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-core:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-core/5.0.4.RELEASE/spring-core-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-expression:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-expression/5.0.4.RELEASE/spring-expression-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jcl:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jcl/5.0.4.RELEASE/spring-jcl-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-test:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-test/5.0.4.RELEASE/spring-test-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-web:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-web/5.0.4.RELEASE/spring-web-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-webmvc:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-webmvc/5.0.4.RELEASE/spring-webmvc-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.xmlunit:xmlunit-core:2.5.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.yaml:snakeyaml:1.19.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module MB_Backend -->
+  
+  <dirname property="module.mb_backend.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.mb_backend" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mb_backend" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mb_backend" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mb_backend" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="mb_backend.output.dir" value="${module.mb_backend.basedir}/target/classes"/>
+  <property name="mb_backend.testoutput.dir" value="${module.mb_backend.basedir}/target/test-classes"/>
+  
+  <path id="mb_backend.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mb_backend.module.production.classpath">
+    <path refid="${module.jdk.classpath.mb_backend}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.0.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.4.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.28.classpath"/>
+    <path refid="library.maven:_org.hibernate.validator:hibernate-validator:6.0.7.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:2.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jcl:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.json:json:20180130.classpath"/>
+  </path>
+  
+  <path id="mb_backend.runtime.production.module.classpath">
+    <pathelement location="${mb_backend.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.0.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.19.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.4.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.28.classpath"/>
+    <path refid="library.maven:_org.hibernate.validator:hibernate-validator:6.0.7.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:2.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jcl:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.json:json:20180130.classpath"/>
+  </path>
+  
+  <path id="mb_backend.module.classpath">
+    <path refid="${module.jdk.classpath.mb_backend}"/>
+    <pathelement location="${mb_backend.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.0.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.19.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.4.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.28.classpath"/>
+    <path refid="library.maven:_org.hibernate.validator:hibernate-validator:6.0.7.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:2.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-test:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:2.4.0.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:2.3.classpath"/>
+    <path refid="library.maven:_net.minidev:accessors-smart:1.2.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.4.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.assertj:assertj-core:3.9.1.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:2.15.0.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy:1.7.10.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy-agent:1.7.10.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.6.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.skyscreamer:jsonassert:1.5.0.classpath"/>
+    <path refid="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jcl:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.xmlunit:xmlunit-core:2.5.1.classpath"/>
+    <path refid="library.maven:_org.json:json:20180130.classpath"/>
+  </path>
+  
+  <path id="mb_backend.runtime.module.classpath">
+    <pathelement location="${mb_backend.testoutput.dir}"/>
+    <pathelement location="${mb_backend.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.0.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath"/>
+    <path refid="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.19.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.4.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.28.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.28.classpath"/>
+    <path refid="library.maven:_org.hibernate.validator:hibernate-validator:6.0.7.final.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:2.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath"/>
+    <path refid="library.maven:_com.fasterxml:classmate:1.3.4.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-test:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test:2.0.0.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:2.0.0.release.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:2.4.0.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:2.3.classpath"/>
+    <path refid="library.maven:_net.minidev:accessors-smart:1.2.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.4.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.assertj:assertj-core:3.9.1.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:2.15.0.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy:1.7.10.classpath"/>
+    <path refid="library.maven:_net.bytebuddy:byte-buddy-agent:1.7.10.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.6.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.skyscreamer:jsonassert:1.5.0.classpath"/>
+    <path refid="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jcl:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:5.0.4.release.classpath"/>
+    <path refid="library.maven:_org.xmlunit:xmlunit-core:2.5.1.classpath"/>
+    <path refid="library.maven:_org.json:json:20180130.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mb_backend">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mb_backend">
+    <patternset refid="excluded.from.module.mb_backend"/>
+  </patternset>
+  
+  <path id="mb_backend.module.sourcepath">
+    <dirset dir="${module.mb_backend.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="mb_backend.module.test.sourcepath">
+    <dirset dir="${module.mb_backend.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mb_backend" depends="compile.module.mb_backend.production,compile.module.mb_backend.tests" description="Compile module MB_Backend"/>
+  
+  <target name="compile.module.mb_backend.production" depends="register.custom.compilers" description="Compile module MB_Backend; production classes">
+    <mkdir dir="${mb_backend.output.dir}"/>
+    <javac2 destdir="${mb_backend.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mb_backend}/javac">
+      <compilerarg line="${compiler.args.mb_backend}"/>
+      <bootclasspath refid="mb_backend.module.bootclasspath"/>
+      <classpath refid="mb_backend.module.production.classpath"/>
+      <src refid="mb_backend.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mb_backend"/>
+    </javac2>
+    
+    <copy todir="${mb_backend.output.dir}">
+      <fileset dir="${module.mb_backend.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.mb_backend.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mb_backend.tests" depends="register.custom.compilers,compile.module.mb_backend.production" description="compile module MB_Backend; test classes" unless="skip.tests">
+    <mkdir dir="${mb_backend.testoutput.dir}"/>
+    <javac2 destdir="${mb_backend.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mb_backend}/javac">
+      <compilerarg line="${compiler.args.mb_backend}"/>
+      <bootclasspath refid="mb_backend.module.bootclasspath"/>
+      <classpath refid="mb_backend.module.classpath"/>
+      <src refid="mb_backend.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mb_backend"/>
+    </javac2>
+    
+    <copy todir="${mb_backend.testoutput.dir}">
+      <fileset dir="${module.mb_backend.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.mb_backend" description="cleanup module">
+    <delete dir="${mb_backend.output.dir}"/>
+    <delete dir="${mb_backend.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.mb_backend, clean.artifact.mb_backend" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.mb_backend" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.mb_backend" value="${basedir}/out/artifacts/MB_Backend"/>
+    <property name="artifact.output.mb_backend:jar" value="${basedir}/out/artifacts/MB_Backend_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.MB_Backend" value="${artifacts.temp.dir}/MB_Backend.jar"/>
+    <property name="temp.jar.path.MB_Backend.jar" value="${artifacts.temp.dir}/1/MB_Backend.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/1"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
+  </target>
+  
+  <target name="clean.artifact.mb_backend" description="clean MB_Backend artifact output">
+    <delete dir="${artifact.output.mb_backend}"/>
+  </target>
+  
+  <target name="artifact.mb_backend" depends="init.artifacts, compile.module.mb_backend" description="Build &#39;MB_Backend&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <mkdir dir="${artifact.output.mb_backend}"/>
+    <copy todir="${artifact.temp.output.MB_Backend}">
+      <fileset dir="${mb_backend.output.dir}"/>
+    </copy>
+    <fx:fileset id="all_but_MB_Backend" dir="${artifact.temp.output.MB_Backend}" includes="**/*.jar">
+      <exclude name="MB_Backend.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_MB_Backend" dir="${artifact.temp.output.MB_Backend}" includes="**/*.jar"/>
+    <fx:application id="MB_Backend_id" name="MB_Backend" mainClass="null"/>
+    <fx:jar destfile="${artifact.temp.output.MB_Backend}\MB_Backend.jar">
+      <fx:application refid="MB_Backend_id"/>
+      <fileset dir="${artifact.temp.output.MB_Backend}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_MB_Backend"/>
+      </fx:resources>
+      <manifest/>
+    </fx:jar>
+    <fx:deploy width="600" height="400" updatemode="background" outdir="${artifact.temp.output.MB_Backend}\deploy" outfile="MB_Backend">
+      <fx:application refid="MB_Backend_id"/>
+      <fx:resources>
+        <fx:fileset refid="all_MB_Backend"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.mb_backend}">
+      <fileset dir="${artifact.temp.output.MB_Backend}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.MB_Backend}"/>
+    </delete>
+  </target>
+  
+  <target name="artifact.mb_backend:jar" depends="init.artifacts, compile.module.mb_backend" description="Build &#39;MB_Backend:jar&#39; artifact">
+    <property name="artifact.temp.output.mb_backend:jar" value="${artifacts.temp.dir}/MB_Backend_jar"/>
+    <mkdir dir="${artifact.temp.output.mb_backend:jar}"/>
+    <jar destfile="${temp.jar.path.MB_Backend.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${mb_backend.output.dir}"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-tomcat/2.0.0.RELEASE/spring-boot-starter-tomcat-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-webmvc/5.0.4.RELEASE/spring-webmvc-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.4/jackson-module-parameter-names-2.9.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter/2.0.0.RELEASE/spring-boot-starter-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/json/json/20180130/json-20180130.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.4/jackson-core-2.9.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-core/8.5.28/tomcat-embed-core-8.5.28.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-beans/5.0.4.RELEASE/spring-beans-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.28/tomcat-embed-websocket-8.5.28.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-context/5.0.4.RELEASE/spring-context-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/hibernate/validator/hibernate-validator/6.0.7.Final/hibernate-validator-6.0.7.Final.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-jcl/5.0.4.RELEASE/spring-jcl-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-core/5.0.4.RELEASE/spring-core-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot/2.0.0.RELEASE/spring-boot-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-json/2.0.0.RELEASE/spring-boot-starter-json-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.9.4/jackson-databind-2.9.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-web/2.0.0.RELEASE/spring-boot-starter-web-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-el/8.5.28/tomcat-embed-el-8.5.28.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.4/jackson-datatype-jsr310-2.9.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-autoconfigure/2.0.0.RELEASE/spring-boot-autoconfigure-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-logging/2.0.0.RELEASE/spring-boot-starter-logging-2.0.0.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-web/5.0.4.RELEASE/spring-web-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-aop/5.0.4.RELEASE/spring-aop-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.4/jackson-datatype-jdk8-2.9.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/springframework/spring-expression/5.0.4.RELEASE/spring-expression-5.0.4.RELEASE.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.MB_Backend.jar}" tofile="${artifact.temp.output.mb_backend:jar}/MB_Backend.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.mb_backend, artifact.mb_backend:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.mb_backend:jar}"/>
+    <copy todir="${artifact.output.mb_backend:jar}">
+      <fileset dir="${artifact.temp.output.mb_backend:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
